@@ -1,0 +1,6 @@
+{
+  "arrowParens": "avoid",
+  "singleQuote": true,
+  "semicolon": false,
+  "colon": false
+}
