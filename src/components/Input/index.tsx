@@ -5,13 +5,17 @@ import * as S from './styles';
 
 type InputProps = {
   name: string;
+  home?: boolean;
   icon?: React.ComponentType<IconBaseProps>;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
+export const Input = ({ name, home, icon: Icon, ...rest }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (home) {
+      return;
+    }
     inputRef.current.focus();
   }, []);
 

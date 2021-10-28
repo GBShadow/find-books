@@ -79,7 +79,7 @@ export const Box = styled.div`
   border-radius: 5px;
   position: relative;
 
-  &:last-child {
+  &.box2 {
     background-color: var(--purple);
     height: 127px;
     padding: 1.5rem;
@@ -117,9 +117,11 @@ export const BackgroundImage = styled.div`
 `;
 
 export const BookImage = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
+  a {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+  }
 `;
 
 export const FormsImage = styled.div`
@@ -138,6 +140,14 @@ export const Cover = styled.div`
   border-radius: 5px;
   background-color: var(--gray-100);
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: var(--black-100);
+  font-size: 1.2rem;
+
   &.cover2 {
     width: 73px;
     height: 100px;
@@ -155,7 +165,7 @@ export const CurrentlyBook = styled.div`
   width: 88px;
   height: 130px;
 
-  > div {
+  > a {
     position: absolute;
     min-width: 88px;
     height: 130px;

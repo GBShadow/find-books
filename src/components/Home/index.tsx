@@ -1,7 +1,82 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { parseCookies } from 'nookies';
 import * as S from './styles';
+import api from 'services/api';
+import { ApiBooks } from 'components/ListBooks';
+import { MdOutlineImageNotSupported } from 'react-icons/md';
+import { ApiBook } from 'components/Details';
+
+type Book = {
+  id: string;
+  title: string;
+  author: string;
+  imageUrl: string;
+  reading?: number;
+};
 
 export const Home = () => {
+  const [books, setBooks] = useState<Book[]>([]);
+  const [currently, setCurrently] = useState<Book>();
+
+  useEffect(() => {
+    (async () => {
+      const { 'search.query': query } = parseCookies();
+
+      if (query === '""') {
+        return;
+      }
+
+      const { data } = await api.get<ApiBooks>(
+        `/volumes?q=${query}&maxResults=12&orderBy=newest`
+      );
+
+      const serializedBooks = data.items.map(item => {
+        const [firstPart, secondPart] = item.volumeInfo.title.split(' ');
+
+        const title =
+          firstPart.length <= 3 ? `${firstPart} ${secondPart}` : firstPart;
+
+        return {
+          id: item.id,
+          title,
+          author: item.volumeInfo.authors ? item.volumeInfo.authors[0] : '',
+          imageUrl: item.volumeInfo?.imageLinks?.thumbnail,
+          reading: Math.floor(Math.random() * 300 + 50),
+        };
+      });
+
+      setBooks(serializedBooks);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { 'last.book': lastBook } = parseCookies();
+      console.log(lastBook);
+
+      if (lastBook === '""' || lastBook === undefined) {
+        return;
+      }
+
+      const id = lastBook.replaceAll('"', '');
+
+      const { data } = await api.get<ApiBook>(`/volumes/${id}`);
+
+      const [firstPart, secondPart] = data.volumeInfo.title.split(' ');
+
+      const serializedBook = {
+        id: data.id,
+        title: `${firstPart} ${secondPart}`,
+        description: data.volumeInfo.description,
+        author: data.volumeInfo?.authors ? data.volumeInfo.authors[0] : '',
+        imageUrl: data.volumeInfo.imageLinks?.thumbnail,
+      };
+
+      setCurrently(serializedBook);
+    })();
+  }, []);
+
   return (
     <S.Container>
       <S.Welcome>
@@ -19,48 +94,44 @@ export const Home = () => {
           </div>
         </S.Header>
         <S.Content>
-          <S.Box>
-            <S.Info>
-              {/* <S.BackgroundImage>
-                <img src="/oval-left.png" />
-              </S.BackgroundImage> */}
-              <strong>Hooked</strong>
-              <span>Nir Eyal</span>
-              <div>
-                <img src="chart.svg" />
-                <p>
-                  <strong>120+</strong> Read Now
-                </p>
-              </div>
-            </S.Info>
-            <S.BookImage>
-              <S.FormsImage />
-              <S.Cover>
-                <img src="book-1.png" />
-              </S.Cover>
-            </S.BookImage>
-          </S.Box>
-          <S.Box>
-            <S.Info>
-              {/* <S.BackgroundImage>
-                <img src="/oval-left.png" />
-              </S.BackgroundImage> */}
-              <strong>The One </strong>
-              <span>Garry Keller</span>
-              <div>
-                <img src="chart.svg" />
-                <p>
-                  <strong>90+</strong> Read Now
-                </p>
-              </div>
-            </S.Info>
-            <S.BookImage>
-              <S.FormsImage />
-              <S.Cover className="cover2">
-                <img src="book-3.jpg" />
-              </S.Cover>
-            </S.BookImage>
-          </S.Box>
+          {books?.map((book, index) => {
+            const variant = (index + 1) % 2 === 0 ? true : false;
+
+            return (
+              <S.Box key={book.id} className={variant && 'box2'}>
+                <S.Info>
+                  <S.BackgroundImage>
+                    <img src="/oval-left.png" />
+                  </S.BackgroundImage>
+                  <strong>{book.title}</strong>
+                  <span>{book.author}</span>
+                  <div>
+                    <img src="chart.svg" />
+                    <p>
+                      <strong>{book.reading}+</strong> Read Now
+                    </p>
+                  </div>
+                </S.Info>
+                <S.BookImage>
+                  <Link href={`/details/${book.id}`}>
+                    <a>
+                      <S.FormsImage />
+                      <S.Cover className={variant && 'cover2'}>
+                        {book.imageUrl ? (
+                          <img src={book.imageUrl} />
+                        ) : (
+                          <>
+                            <MdOutlineImageNotSupported size={20} />
+                            <span>No Image</span>
+                          </>
+                        )}
+                      </S.Cover>
+                    </a>
+                  </Link>
+                </S.BookImage>
+              </S.Box>
+            );
+          })}
         </S.Content>
       </S.Section>
       <S.Section>
@@ -74,14 +145,16 @@ export const Home = () => {
         </S.Header>
         <S.Content2>
           <S.CurrentlyBook>
-            <div>
-              <img src="book-2.png" />
-            </div>
+            <Link href={`/details/${currently.id}`}>
+              <a>
+                <img src={currently.imageUrl} />
+              </a>
+            </Link>
           </S.CurrentlyBook>
           <S.InfoBook>
             <div>
-              <strong>Originals</strong>
-              <span>by Adam Grant</span>
+              <strong>{currently.title}</strong>
+              <span>by {currently.author}</span>
               <div>
                 <img src="bookmark.svg" />
                 <p>

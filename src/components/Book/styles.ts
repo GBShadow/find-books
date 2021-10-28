@@ -1,19 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
-  padding-top: 4rem;
-
-  strong {
-    grid-column: 2;
-    justify-self: center;
-    align-self: center;
-  }
-`;
-
 export const Book = styled.a`
+  max-width: 100px;
+  justify-self: center;
+
   div {
     width: 100px;
     height: 150px;
@@ -32,10 +22,6 @@ export const Book = styled.a`
       height: 150px;
     }
   }
-
-  strong {
-    display: block;
-  }
 `;
 
 export const Title = styled.strong`
@@ -48,4 +34,5 @@ export const Author = styled.strong`
   font-size: 1rem;
   font-weight: 900;
   margin-top: 0.5rem;
+  display: block;
 `;

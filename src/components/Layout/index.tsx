@@ -20,6 +20,7 @@ export const Layout = ({ children, home }: LayoutProps) => {
         <Link href="/search-books">
           <a>
             <Input
+              home
               name="search"
               placeholder="Search book"
               icon={VscSearch}

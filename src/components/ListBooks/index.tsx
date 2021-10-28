@@ -43,7 +43,7 @@ export const ListBooks = () => {
           setLoading(true);
 
           const { data } = await api.get<ApiBooks>(
-            `/volumes?q=${query}&startIndex=${page}&maxResults=12`
+            `/volumes?q=${query}&startIndex=${page}&maxResults=12&orderBy=relevance`
           );
 
           const serializedBooks = data.items.map(item => ({

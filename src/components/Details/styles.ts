@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div``;
+
+export const BackButtonContainer = styled.div`
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+
   > button {
     position: absolute;
     top: 55px;
@@ -50,6 +56,8 @@ export const BackgroundImage = styled.div`
 `;
 
 export const Content = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
   margin-top: 6.7rem;
   padding: 0 2rem 5rem;
 
@@ -72,6 +80,10 @@ export const DescriptionContainer = styled.div`
   height: 275px;
   overflow: auto;
   margin-top: 1rem;
+
+  @media screen and (min-width: 900px) {
+    height: 500px;
+  }
 `;
 
 export const Description = styled.div`
@@ -83,6 +95,8 @@ export const Description = styled.div`
 
 export const Menu = styled.section`
   width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border-radius: 2px;
@@ -92,6 +106,10 @@ export const Menu = styled.section`
     padding: 2rem;
     background-color: var(--white);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
   }
 
   button + button {
