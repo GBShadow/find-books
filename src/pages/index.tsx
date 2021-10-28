@@ -1,9 +1,10 @@
+import { Home } from 'components/Home';
 import { Layout } from 'components/Layout';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <Layout home>
-      <div></div>
+      <Home />
     </Layout>
   );
 }

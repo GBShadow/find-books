@@ -16,12 +16,12 @@ export const Container = styled.div`
 
   input {
     width: 100%;
-    color: var(--gray-300);
+    color: var(--gray-400);
     background-color: var(--input-background);
     border: 0;
 
     &::placeholder {
-      color: var(--gray-300);
+      color: var(--gray-400);
     }
   }
 `;

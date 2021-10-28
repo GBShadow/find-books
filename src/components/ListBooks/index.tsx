@@ -30,7 +30,6 @@ export type ApiBooks = {
 
 export const ListBooks = () => {
   const [books, setBooks] = useState<Book[]>([]);
-  const [totalBooks, setTotalBooks] = useState(0);
   const [page, setPage] = useState(0);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -41,7 +40,6 @@ export const ListBooks = () => {
     (async () => {
       if (query) {
         try {
-          console.log(query);
           setLoading(true);
 
           const { data } = await api.get<ApiBooks>(
@@ -55,9 +53,6 @@ export const ListBooks = () => {
             imageUrl: item.volumeInfo?.imageLinks?.thumbnail,
           }));
 
-          console.log({ serializedBooks });
-
-          setTotalBooks(data.totalItems);
           setBooks(serializedBooks);
           setError(false);
         } catch (err) {
@@ -72,7 +67,7 @@ export const ListBooks = () => {
 
   useEffect(() => {
     (async () => {
-      if (page) {
+      if (page && query) {
         const { data } = await api.get<ApiBooks>(
           `/volumes?q=${query}&startIndex=${page}&maxResults=12`
         );
@@ -84,25 +79,24 @@ export const ListBooks = () => {
           imageUrl: item.volumeInfo?.imageLinks?.thumbnail,
         }));
 
-        setTotalBooks(data.totalItems);
         setBooks(prev => [...prev, ...serializedBooks]);
       }
     })();
   }, [page]);
 
-  console.log(error);
-
   return (
     <Layout>
       <>
         {error ? (
-          <strong>Não há livros para essa pesquisa</strong>
+          <strong>There are no books for this research!</strong>
         ) : (
           !!books.length && (
             <>
               <Books books={books} loading={loading} />
               {!loading && (
-                <S.Button onClick={() => setPage(page + 1)}>Load More</S.Button>
+                <S.Button disabled={false} onClick={() => setPage(page + 1)}>
+                  Load More
+                </S.Button>
               )}
             </>
           )

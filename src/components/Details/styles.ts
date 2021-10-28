@@ -77,7 +77,7 @@ export const DescriptionContainer = styled.div`
 export const Description = styled.div`
   font-size: 1.4rem;
   line-height: 150%;
-  color: var(--gray-300);
+  color: var(--gray-400);
   padding-bottom: 1rem;
 `;
 
