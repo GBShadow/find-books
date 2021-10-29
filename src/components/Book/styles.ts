@@ -4,6 +4,10 @@ export const Book = styled.a`
   max-width: 100px;
   justify-self: center;
 
+  @media screen and (min-width: 900px) {
+    max-width: 160px;
+  }
+
   div {
     width: 100px;
     height: 150px;
@@ -17,9 +21,14 @@ export const Book = styled.a`
     gap: 1.6rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 
+    @media screen and (min-width: 900px) {
+      width: 160px;
+      height: 230px;
+    }
+
     img {
-      width: 100px;
-      height: 150px;
+      width: 100%;
+      height: 100%;
     }
   }
 `;

@@ -48,9 +48,15 @@ export const BackgroundImage = styled.div`
     gap: 1.6rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 
+    @media screen and (min-width: 900px) {
+      width: 180px;
+      height: 260px;
+      margin-bottom: -60px;
+    }
+
     img {
-      width: 150px;
-      height: 230px;
+      width: 100%;
+      height: 100%;
     }
   }
 `;
@@ -60,6 +66,10 @@ export const Content = styled.div`
   margin: 0 auto;
   margin-top: 6.7rem;
   padding: 0 2rem 5rem;
+
+  @media screen and (min-width: 900px) {
+    margin-top: 8rem;
+  }
 
   h1 {
     margin-bottom: 0.7rem;

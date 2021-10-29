@@ -22,6 +22,14 @@ export const Welcome = styled.header`
 
 export const Section = styled.section`
   width: 100%;
+  position: relative;
+
+  > img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
 
   & + & {
     margin-top: 3rem;
@@ -41,6 +49,8 @@ export const Header = styled.header`
   a {
     color: var(--blue-100);
     transition: all 0.4s;
+    position: relative;
+    z-index: 2;
 
     &:active {
       opacity: 0.3;
@@ -90,6 +100,8 @@ export const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
+  z-index: 5;
 
   > strong {
     font-size: 2.7rem;
@@ -164,15 +176,26 @@ export const CurrentlyBook = styled.div`
   min-width: 88px;
   width: 88px;
   height: 130px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+
+  @media screen and (min-width: 700px) {
+    width: 148px;
+    height: 190px;
+  }
 
   > a {
     position: absolute;
     min-width: 88px;
     height: 130px;
     background-color: var(--gray-100);
-    border-radius: 1px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 22;
+
+    @media screen and (min-width: 700px) {
+      width: 148px;
+      height: 190px;
+    }
 
     img {
       width: 100%;
@@ -188,6 +211,10 @@ export const InfoBook = styled.div`
   display: flex;
   background-color: var(--green);
   overflow: hidden;
+
+  @media screen and (min-width: 700px) {
+    height: 150px;
+  }
 
   > img {
     position: absolute;
@@ -231,6 +258,15 @@ export const InfoBook = styled.div`
 `;
 
 export const LastVideos = styled.div`
+  display: flex;
+  gap: 1rem;
+  overflow: auto;
+  padding-bottom: 1rem; ;
+`;
+
+export const Video = styled.div`
+  min-width: 320px;
+  width: 400px;
   margin-top: 1.5rem;
   background-color: var(--white);
   border-radius: 0 0 5px 5px;
@@ -240,6 +276,10 @@ export const LastVideos = styled.div`
 export const ImageVideo = styled.div`
   width: 100%;
   overflow: hidden;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export const InfoVideo = styled.div`

@@ -85,6 +85,7 @@ export const Home = () => {
         </h1>
       </S.Welcome>
       <S.Section>
+        <img src="oval-right.png" />
         <S.Header>
           <strong>Discover new book</strong>
           <div>
@@ -99,10 +100,10 @@ export const Home = () => {
 
             return (
               <S.Box key={book.id} className={variant && 'box2'}>
+                <S.BackgroundImage>
+                  <img src="/oval-left.png" />
+                </S.BackgroundImage>
                 <S.Info>
-                  <S.BackgroundImage>
-                    <img src="/oval-left.png" />
-                  </S.BackgroundImage>
                   <strong>{book.title}</strong>
                   <span>{book.author}</span>
                   <div>
@@ -145,16 +146,16 @@ export const Home = () => {
         </S.Header>
         <S.Content2>
           <S.CurrentlyBook>
-            <Link href={`/details/${currently.id}`}>
+            <Link href={`/details/${currently?.id}`}>
               <a>
-                <img src={currently.imageUrl} />
+                <img src={currently?.imageUrl} />
               </a>
             </Link>
           </S.CurrentlyBook>
           <S.InfoBook>
             <div>
-              <strong>{currently.title}</strong>
-              <span>by {currently.author}</span>
+              <strong>{currently?.title}</strong>
+              <span>by {currently?.author}</span>
               <div>
                 <img src="bookmark.svg" />
                 <p>
@@ -176,23 +177,44 @@ export const Home = () => {
           </div>
         </S.Header>
         <S.LastVideos>
-          <S.ImageVideo>
-            <img src="image-video.png" />
-          </S.ImageVideo>
-          <S.InfoVideo>
-            <strong>Don’t Make Me Think - Steve Krug</strong>
-            <ul>
-              <li>Jesse Showalter </li>
-              <li>5.2K Views </li>
-              <li>1 Week ago</li>
-            </ul>
-            <p>
-              "Don't Make Me Think" by Steve Krug is one of the first books I
-              read when I was getting into digital design. It helped me move
-              from designing things that just "look nice" to designing things
-              that are usable, useful, memorable and simple to learn and use.{' '}
-            </p>
-          </S.InfoVideo>
+          <S.Video>
+            <S.ImageVideo>
+              <img src="image-video.png" />
+            </S.ImageVideo>
+            <S.InfoVideo>
+              <strong>Don’t Make Me Think - Steve Krug</strong>
+              <ul>
+                <li>Jesse Showalter </li>
+                <li>5.2K Views </li>
+                <li>1 Week ago</li>
+              </ul>
+              <p>
+                "Don't Make Me Think" by Steve Krug is one of the first books I
+                read when I was getting into digital design. It helped me move
+                from designing things that just "look nice" to designing things
+                that are usable, useful, memorable and simple to learn and use.{' '}
+              </p>
+            </S.InfoVideo>
+          </S.Video>
+          <S.Video>
+            <S.ImageVideo>
+              <img src="image-video.png" />
+            </S.ImageVideo>
+            <S.InfoVideo>
+              <strong>Don’t Make Me Think - Steve Krug</strong>
+              <ul>
+                <li>Jesse Showalter </li>
+                <li>5.2K Views </li>
+                <li>1 Week ago</li>
+              </ul>
+              <p>
+                "Don't Make Me Think" by Steve Krug is one of the first books I
+                read when I was getting into digital design. It helped me move
+                from designing things that just "look nice" to designing things
+                that are usable, useful, memorable and simple to learn and use.{' '}
+              </p>
+            </S.InfoVideo>
+          </S.Video>
         </S.LastVideos>
       </S.Section>
     </S.Container>
