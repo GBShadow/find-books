@@ -53,7 +53,6 @@ export const Details = ({ id }: DetailsProps) => {
     (async () => {
       try {
         const { data } = await api.get<ApiBook>(`/volumes/${id}`);
-        console.log({ id });
 
         const serializedBook = {
           title: data.volumeInfo.title,
@@ -62,8 +61,6 @@ export const Details = ({ id }: DetailsProps) => {
           author: data.volumeInfo?.authors ? data.volumeInfo.authors[0] : '',
           imageUrl: data.volumeInfo.imageLinks?.thumbnail,
         };
-
-        console.log({ serializedBook });
 
         setBook(serializedBook);
       } catch (err) {

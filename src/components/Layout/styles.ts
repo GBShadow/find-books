@@ -17,7 +17,7 @@ export const Container = styled.div`
   padding: 5rem 2rem 7rem;
   max-width: 900px;
   margin: 0 auto;
-  animation: ${start} 1s linear;
+  animation: ${start} 0.7s linear;
 
   a {
     width: 100%;
