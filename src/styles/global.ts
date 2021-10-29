@@ -1,6 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+  @font-face {
+    font-family: 'SFProDisplay400';
+    src: url('/fonts/SFPRODISPLAYREGULAR.woff');
+  }
+
+  @font-face {
+    font-family: 'SFProDisplay500';
+    src: url('/fonts/SFPRODISPLAYMEDIUM.woff');
+  }
+
+  @font-face {
+    font-family: 'SFProDisplay700';
+    src: url('/fonts/SFPRODISPLAYBOLD.woff');
+  }
+
   :root {
     font-size: 62.5%;
     --input-background: #FDFCFC;
@@ -34,8 +49,7 @@ export default createGlobalStyle`
   input,
   textarea,
   button {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'SFProDisplay400', sans-serif;
     font-size: 1.6rem;
     color: var(--black-200);
   }
@@ -46,12 +60,12 @@ export default createGlobalStyle`
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    scrollbar-width: 8px;
+    scrollbar-width: 3px;
   }
 
   ::-webkit-scrollbar {
     width: 3px;
-    height: 1px;
+    height: 4px;
   }
   ::-webkit-scrollbar-thumb {
     background: #aeaeae;

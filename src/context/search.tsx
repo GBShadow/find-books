@@ -26,6 +26,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   }, []);
 
   useEffect(() => {
+    if (!query) return;
+
     setCookie(undefined, 'search.query', JSON.stringify(query), {
       maxAge: 60 * 60 * 24,
       path: '/',

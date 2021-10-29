@@ -6,6 +6,7 @@ import api from 'services/api';
 import { ApiBooks } from 'components/ListBooks';
 import { MdOutlineImageNotSupported } from 'react-icons/md';
 import { ApiBook } from 'components/Details';
+import { defaultBook, defaultBooks } from 'helpers/defaultBooks';
 
 type Book = {
   id: string;
@@ -21,11 +22,19 @@ export const Home = () => {
 
   useEffect(() => {
     (async () => {
-      const { 'search.query': query } = parseCookies();
+      const { 'search.query': queryInCookie } = parseCookies();
 
-      if (query === '""') {
+      if (
+        queryInCookie === '""' ||
+        queryInCookie === 'undefined' ||
+        queryInCookie === undefined
+      ) {
+        setBooks(defaultBooks);
+
         return;
       }
+
+      const query = JSON.parse(queryInCookie);
 
       const { data } = await api.get<ApiBooks>(
         `/volumes?q=${query}&maxResults=12&orderBy=newest`
@@ -53,13 +62,17 @@ export const Home = () => {
   useEffect(() => {
     (async () => {
       const { 'last.book': lastBook } = parseCookies();
-      console.log(lastBook);
 
-      if (lastBook === '""' || lastBook === undefined) {
+      if (
+        lastBook === '""' ||
+        lastBook === 'undefined' ||
+        lastBook === undefined
+      ) {
+        setCurrently(defaultBook);
         return;
       }
 
-      const id = lastBook.replaceAll('"', '');
+      const id = JSON.parse(lastBook);
 
       const { data } = await api.get<ApiBook>(`/volumes/${id}`);
 
@@ -67,7 +80,7 @@ export const Home = () => {
 
       const serializedBook = {
         id: data.id,
-        title: `${firstPart} ${secondPart}`,
+        title: `${firstPart} ${secondPart ? secondPart : ''}`,
         description: data.volumeInfo.description,
         author: data.volumeInfo?.authors ? data.volumeInfo.authors[0] : '',
         imageUrl: data.volumeInfo.imageLinks?.thumbnail,
@@ -99,7 +112,7 @@ export const Home = () => {
             const variant = (index + 1) % 2 === 0 ? true : false;
 
             return (
-              <S.Box key={book.id} className={variant && 'box2'}>
+              <S.Box key={`${book.id}-${index}`} className={variant && 'box2'}>
                 <S.BackgroundImage>
                   <img src="/oval-left.png" />
                 </S.BackgroundImage>

@@ -9,24 +9,26 @@ import ActiveLink from 'components/ActiveLink';
 export const Menu = () => {
   return (
     <S.Container>
-      <ActiveLink activeClassName="active" href="/">
-        <a className="active">
-          <VscHome size={20} />
-          Home
-        </a>
-      </ActiveLink>
-      <ActiveLink activeClassName="active" href="#">
-        <a>
-          <RiBookLine size={20} />
-          Library
-        </a>
-      </ActiveLink>
-      <ActiveLink activeClassName="active" href="#">
-        <a>
-          <MdPersonOutline size={20} />
-          Profile
-        </a>
-      </ActiveLink>
+      <div>
+        <ActiveLink activeClassName="active" href="/">
+          <a className="active">
+            <VscHome size={20} />
+            Home
+          </a>
+        </ActiveLink>
+        <ActiveLink activeClassName="active" href="#">
+          <a>
+            <RiBookLine size={20} />
+            Library
+          </a>
+        </ActiveLink>
+        <ActiveLink activeClassName="active" href="#">
+          <a>
+            <MdPersonOutline size={20} />
+            Profile
+          </a>
+        </ActiveLink>
+      </div>
     </S.Container>
   );
 };

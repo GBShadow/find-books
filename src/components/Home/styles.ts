@@ -11,10 +11,12 @@ export const Welcome = styled.header`
 
   h1 {
     font-size: 2.4rem;
+    font-family: 'SFProDisplay400';
     font-weight: 400;
 
     span {
       color: var(--red);
+      font-family: 'SFProDisplay500';
       font-weight: 500;
     }
   }
@@ -43,6 +45,7 @@ export const Header = styled.header`
 
   strong {
     font-size: 1.8rem;
+    font-family: 'SFProDisplay500';
     font-weight: 500;
   }
 
@@ -68,6 +71,7 @@ export const Content = styled.div`
   gap: 1rem;
   margin-top: 1.5rem;
   overflow-x: auto;
+  padding-right: 6rem;
 `;
 
 export const Content2 = styled.div`
@@ -179,6 +183,7 @@ export const CurrentlyBook = styled.div`
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 5;
 
   @media screen and (min-width: 700px) {
     width: 148px;
@@ -233,6 +238,8 @@ export const InfoBook = styled.div`
 
     strong {
       font-size: 2rem;
+      font-family: 'Playfair Display';
+      letter-spacing: 1px;
     }
 
     span {
